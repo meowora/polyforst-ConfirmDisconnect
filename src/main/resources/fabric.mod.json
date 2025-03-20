@@ -19,10 +19,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.microcontrollers.examplemod.ExampleMod"
+			"dev.microcontrollers.confirmdisconnect.ConfirmDisconnect"
 		],
 		"modmenu": [
-			"dev.microcontrollers.examplemod.config.ModMenuIntegration"
+			"dev.microcontrollers.confirmdisconnect.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

@@ -1,4 +1,4 @@
-package dev.microcontrollers.examplemod.config;
+package dev.microcontrollers.confirmdisconnect.config;
 
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.Option;
@@ -12,24 +12,24 @@ import dev.isxander.yacl3.platform.YACLPlatform;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-public class ExampleConfig {
-    public static final ConfigClassHandler<ExampleConfig> CONFIG = ConfigClassHandler.createBuilder(ExampleConfig.class)
+public class ConfirmDisconnectConfig {
+    public static final ConfigClassHandler<ConfirmDisconnectConfig> CONFIG = ConfigClassHandler.createBuilder(ConfirmDisconnectConfig.class)
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
-                    .setPath(YACLPlatform.getConfigDir().resolve("examplemod.json"))
+                    .setPath(YACLPlatform.getConfigDir().resolve("confirmdisconnect.json"))
                     .build())
             .build();
 
-    @SerialEntry public boolean example = false;
+    @SerialEntry public boolean confirmEnabled = true;
 
     public static Screen configScreen(Screen parent) {
         return YetAnotherConfigLib.create(CONFIG, ((defaults, config, builder) -> builder
-                .title(Component.translatable("examplemod.examplemod"))
+                .title(Component.translatable("confirm-disconnect.confirmdisconnect"))
                 .category(ConfigCategory.createBuilder()
-                        .name(Component.translatable("examplemod.examplemod"))
+                        .name(Component.translatable("confirm-disconnect.confirm-disconnect"))
                         .option(Option.<Boolean>createBuilder()
-                                .name(Component.translatable("examplemod.example"))
-                                .description(OptionDescription.of(Component.translatable("examplemod.example.description")))
-                                .binding(defaults.example, () -> config.example, newVal -> config.example = newVal)
+                                .name(Component.translatable("confirm-disconnect.confirm-enabled"))
+                                .description(OptionDescription.of(Component.translatable("confirm-disconnect.confirm-enabled.description")))
+                                .binding(defaults.confirmEnabled, () -> config.confirmEnabled, newVal -> config.confirmEnabled = newVal)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
                         .build())

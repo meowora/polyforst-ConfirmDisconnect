@@ -1,0 +1,11 @@
+{
+  "modmenu.descriptionTranslation.confirmdisconnect": "Adds a confirmation dialogue before exiting your world/server!",
+  "confirm-disconnect.confirm-disconnect": "Confirm Disconnect",
+  "confirm-disconnect.confirm-enabled": "Enable Confirmation",
+  "confirm-disconnect.confirm-enabled.description": "Enabled/disables the mod.",
+  "confirm-disconnect.are-you-sure-local": "Are you sure you want to quit?",
+  "confirm-disconnect.are-you-sure-multiplayer": "Are you sure you want to disconnect?",
+  "confirm-disconnect.back": "Back",
+  "confirm-disconnect.quit-local": "Quit",
+  "confirm-disconnect.disconnect-multiplayer": "Disconnect"
+}

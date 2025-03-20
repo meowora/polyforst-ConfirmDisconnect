@@ -1,9 +1,15 @@
-# multiloader-multiversion-template
+# Confirm Disconnect
 
-A multiversion, multiloader template powered by Archloom and Stonecutter. Made for Fabric & NeoForge.
+<a href="https://ko-fi.com/microcontrollers" target="_blank">
+  <img alt="kofi-singular-alt" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/donate/kofi-singular-alt_vector.svg">
+</a>
 
-This template is made primarily suited for my own needs, but should be very simple to edit what you need!
+<a href="https://modrinth.com/mod/confirm-disconnect" target="_blank" rel="nofollow">
+  <img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">
+</a>
 
-In terms of buildscript, most of what needs to be changed is in gradle.properties and the root project name in settings.gradle.kts
+<a href="https://www.curseforge.com/minecraft/mc-mods/confirm-disconnect" target="_blank">
+  <img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg">
+</a>
 
-Don't forget to change the license, some information in the FMJ, and the author field in neoforge.mods.toml!
+Adds a confirmation screen whenever you disconnect from a world/server making sure you want to actually quit!
