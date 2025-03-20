@@ -18,9 +18,7 @@ public class ConfirmDisconnectScreen extends Screen {
 
     @Override
     protected void init() {
-        Button cancelWidget = Button.builder(Component.translatable("confirm-disconnect.back"), (btn) -> {
-            onClose();
-        }).bounds((width >> 1) - 125, (height >> 1) - 34, 100, 20).build();
+        Button cancelWidget = Button.builder(Component.translatable("confirm-disconnect.back"), (btn) -> onClose()).bounds((width >> 1) - 125, (height >> 1) - 34, 100, 20).build();
 
         boolean isLocal = Minecraft.getInstance().isLocalServer();
         Button disconnectWidget = Button.builder(isLocal ? Component.translatable("confirm-disconnect.quit-local") : Component.translatable("confirm-disconnect.disconnect-multiplayer"), (btn) -> {

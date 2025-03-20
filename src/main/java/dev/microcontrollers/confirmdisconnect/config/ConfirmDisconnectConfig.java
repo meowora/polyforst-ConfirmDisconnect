@@ -23,7 +23,7 @@ public class ConfirmDisconnectConfig {
 
     public static Screen configScreen(Screen parent) {
         return YetAnotherConfigLib.create(CONFIG, ((defaults, config, builder) -> builder
-                .title(Component.translatable("confirm-disconnect.confirmdisconnect"))
+                .title(Component.translatable("confirm-disconnect.confirm-disconnect"))
                 .category(ConfigCategory.createBuilder()
                         .name(Component.translatable("confirm-disconnect.confirm-disconnect"))
                         .option(Option.<Boolean>createBuilder()
