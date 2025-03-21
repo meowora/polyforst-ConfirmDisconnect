@@ -3,6 +3,8 @@
   "confirm-disconnect.confirm-disconnect": "Confirm Disconnect",
   "confirm-disconnect.confirm-enabled": "Enable Confirmation",
   "confirm-disconnect.confirm-enabled.description": "Enabled/disables the mod.",
+  "confirm-disconnect.confirm-on-left": "Confirm on Left",
+  "confirm-disconnect.confirm-on-left.description": "Moves the confirmation button to the left and the back button to the right.",
   "confirm-disconnect.are-you-sure-local": "Are you sure you want to quit?",
   "confirm-disconnect.are-you-sure-multiplayer": "Are you sure you want to disconnect?",
   "confirm-disconnect.back": "Back",

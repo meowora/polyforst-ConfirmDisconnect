@@ -1,9 +1,12 @@
 package dev.microcontrollers.confirmdisconnect;
 
+import dev.microcontrollers.confirmdisconnect.config.ConfirmDisconnectConfig;
 import dev.microcontrollers.confirmdisconnect.mixin.PauseScreenInvokerMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.layouts.FrameLayout;
+import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -18,17 +21,35 @@ public class ConfirmDisconnectScreen extends Screen {
 
     @Override
     protected void init() {
-        Button cancelWidget = Button.builder(Component.translatable("confirm-disconnect.back"), (btn) -> onClose()).bounds((width >> 1) - 125, (height >> 1) - 34, 100, 20).build();
+        GridLayout gridLayout = new GridLayout();
+        gridLayout.defaultCellSetting().padding(24, 4, 24, 0);
+        GridLayout.RowHelper rowHelper = gridLayout.createRowHelper(2);
 
         boolean isLocal = Minecraft.getInstance().isLocalServer();
-        Button disconnectWidget = Button.builder(isLocal ? Component.translatable("confirm-disconnect.quit-local") : Component.translatable("confirm-disconnect.disconnect-multiplayer"), (btn) -> {
+        boolean isConfirmOnLeft = ConfirmDisconnectConfig.CONFIG.instance().confirmOnLeft;
+
+        Button backButton = Button.builder(Component.translatable("confirm-disconnect.back"), (button) -> onClose())
+                .width(100).build();
+
+        Button disconnectButton = Button.builder(isLocal ?
+                Component.translatable("confirm-disconnect.quit-local") :
+                Component.translatable("confirm-disconnect.disconnect-multiplayer"), (btn) -> {
             assert this.minecraft != null;
             PauseScreen pauseScreen = (PauseScreen) parent;
             this.minecraft.getReportingContext().draftReportHandled(this.minecraft, this, ((PauseScreenInvokerMixin)pauseScreen)::invokeOnDisconnect, true);
-        }).bounds((width >> 1) + 25, (height >> 1) - 34, 100, 20).build();
+        }).width(100).build();
 
-        this.addRenderableWidget(cancelWidget);
-        this.addRenderableWidget(disconnectWidget);
+        if (isConfirmOnLeft) {
+            rowHelper.addChild(disconnectButton, 1, gridLayout.newCellSettings().paddingTop(100));
+            rowHelper.addChild(backButton, 1, gridLayout.newCellSettings().paddingTop(100));
+        } else {
+            rowHelper.addChild(backButton, 1, gridLayout.newCellSettings().paddingTop(100));
+            rowHelper.addChild(disconnectButton, 1, gridLayout.newCellSettings().paddingTop(100));
+        }
+
+        gridLayout.arrangeElements();
+        FrameLayout.alignInRectangle(gridLayout, 0, 0, this.width, this.height, 0.5F, 0.25F);
+        gridLayout.visitWidgets(this::addRenderableWidget);
     }
 
     @Override

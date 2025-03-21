@@ -20,6 +20,7 @@ public class ConfirmDisconnectConfig {
             .build();
 
     @SerialEntry public boolean confirmEnabled = true;
+    @SerialEntry public boolean confirmOnLeft = false;
 
     public static Screen configScreen(Screen parent) {
         return YetAnotherConfigLib.create(CONFIG, ((defaults, config, builder) -> builder
@@ -30,6 +31,12 @@ public class ConfirmDisconnectConfig {
                                 .name(Component.translatable("confirm-disconnect.confirm-enabled"))
                                 .description(OptionDescription.of(Component.translatable("confirm-disconnect.confirm-enabled.description")))
                                 .binding(defaults.confirmEnabled, () -> config.confirmEnabled, newVal -> config.confirmEnabled = newVal)
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Component.translatable("confirm-disconnect.confirm-on-left"))
+                                .description(OptionDescription.of(Component.translatable("confirm-disconnect.confirm-on-left.description")))
+                                .binding(defaults.confirmOnLeft, () -> config.confirmOnLeft, newVal -> config.confirmOnLeft = newVal)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
                         .build())
