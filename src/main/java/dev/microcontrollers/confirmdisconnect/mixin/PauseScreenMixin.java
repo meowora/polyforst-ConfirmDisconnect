@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(PauseScreen.class)
 public class PauseScreenMixin {
-    @WrapOperation(method = "method_19836", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/chat/report/ReportingContext;draftReportHandled(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Ljava/lang/Runnable;Z)V"))
+    @WrapOperation(method = /*? if fabric {*/ "method_19836" /*?} else {*/ /*"lambda$createPauseMenu$9" *//*?}*/, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/chat/report/ReportingContext;draftReportHandled(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Ljava/lang/Runnable;Z)V"))
     private void ad(ReportingContext instance, Minecraft minecraft, Screen screen, Runnable quitter, boolean quitToTitle, Operation<Void> original) {
         if (ConfirmDisconnectConfig.CONFIG.instance().confirmEnabled) {
             Minecraft.getInstance().setScreen(new ConfirmDisconnectScreen(Component.empty(), screen));

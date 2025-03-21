@@ -86,16 +86,11 @@ dependencies {
 
 	if (loader.isFabric) {
 		modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-		if (mc.version == "1.21.3") modImplementation("net.fabricmc.fabric-api:fabric-api:0.106.1+1.21.3") // TODO: remove when I know why this is needed lol
-		if (mc.version == "1.21.3") modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+1.21.2-${loader.loader}")
-		else if (mc.version == "1.21.1") modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+1.21-${loader.loader}")
-		else modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}")
+		modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}")
 		modImplementation("com.terraformersmc:modmenu:${deps.modmenuVersion}")
 	} else if (loader.isNeoforge) {
 		"neoForge"("net.neoforged:neoforge:${findProperty("deps.neoforge")}")
-		if (mc.version == "1.21.3") implementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+1.21.2-${loader.loader}") {isTransitive = false}
-		else if (mc.version == "1.21.1") implementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+1.21-${loader.loader}") {isTransitive = false}
-		else implementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+1.21.2-${loader.loader}") {isTransitive = false} 	}
+		implementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}") {isTransitive = false} 	}
 }
 
 java {
