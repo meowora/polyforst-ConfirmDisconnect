@@ -1,5 +1,6 @@
 package dev.microcontrollers.confirmdisconnect;
 
+import com.google.common.collect.Lists;
 import dev.microcontrollers.confirmdisconnect.config.ConfirmDisconnectConfig;
 import dev.microcontrollers.confirmdisconnect.mixin.PauseScreenInvokerMixin;
 import net.minecraft.client.Minecraft;
@@ -11,8 +12,13 @@ import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class ConfirmDisconnectScreen extends Screen {
     public Screen parent;
+    private int delayTicker;
+    private final List<Button> disconnectButtons = Lists.newArrayList();
 
     public ConfirmDisconnectScreen(Component title, Screen parent) {
         super(title);
@@ -21,6 +27,8 @@ public class ConfirmDisconnectScreen extends Screen {
 
     @Override
     protected void init() {
+        this.delayTicker = 0;
+        this.disconnectButtons.clear();
         GridLayout gridLayout = new GridLayout();
         gridLayout.defaultCellSetting().padding(24, 4, 24, 0);
         GridLayout.RowHelper rowHelper = gridLayout.createRowHelper(2);
@@ -47,6 +55,10 @@ public class ConfirmDisconnectScreen extends Screen {
             rowHelper.addChild(disconnectButton, 1, gridLayout.newCellSettings().paddingTop(100));
         }
 
+        this.disconnectButtons.add(backButton);
+        this.disconnectButtons.add(disconnectButton);
+        this.setButtonsActive(false);
+
         gridLayout.arrangeElements();
         FrameLayout.alignInRectangle(gridLayout, 0, 0, this.width, this.height, 0.5F, 0.25F);
         gridLayout.visitWidgets(this::addRenderableWidget);
@@ -58,6 +70,21 @@ public class ConfirmDisconnectScreen extends Screen {
 
         boolean isLocal = Minecraft.getInstance().isLocalServer();
         graphics.drawCenteredString(this.font, isLocal ? Component.translatable("confirm-disconnect.are-you-sure-local") : Component.translatable("confirm-disconnect.are-you-sure-multiplayer"), width >> 1, 40, 0xFFFFFFFF);
+    }
+
+    public void tick() {
+        super.tick();
+        if (this.delayTicker >= 20 * ConfirmDisconnectConfig.CONFIG.instance().confirmDelay) {
+            this.setButtonsActive(true);
+        }
+        ++this.delayTicker;
+    }
+
+    private void setButtonsActive(boolean active) {
+        Button button;
+        for(Iterator<Button> var2 = this.disconnectButtons.iterator(); var2.hasNext(); button.active = active) {
+            button = var2.next();
+        }
     }
 
     @Override

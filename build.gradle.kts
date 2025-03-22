@@ -18,6 +18,7 @@ class ModData {
 }
 
 class Dependencies {
+	val fapiVersion = property("deps.fapi_version")
 	val modmenuVersion = property("deps.modmenu_version")
 	val yaclVersion = property("deps.yacl_version")
 	val devauthVersion = property("deps.devauth_version")
@@ -86,6 +87,7 @@ dependencies {
 
 	if (loader.isFabric) {
 		modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+		modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fapiVersion}+${mc.version}")
 		modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}")
 		modImplementation("com.terraformersmc:modmenu:${deps.modmenuVersion}")
 	} else if (loader.isNeoforge) {
