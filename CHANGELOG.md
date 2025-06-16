@@ -1,0 +1,3 @@
+- Fix buttons flashing when there is no delay set
+- Port to 1.21.6
+- Drop 1.20.x support

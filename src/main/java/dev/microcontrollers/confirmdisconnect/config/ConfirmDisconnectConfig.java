@@ -24,7 +24,7 @@ public class ConfirmDisconnectConfig {
     @SerialEntry public boolean useDiscreteConfirmation = false;
     @SerialEntry public boolean enableInSingleplayer = true;
     @SerialEntry public boolean enableInMultiplayer = true;
-    @SerialEntry public double confirmDelay = 0F;
+    @SerialEntry public double confirmDelay = 0;
     @SerialEntry public boolean confirmOnLeft = false;
 
     public static Screen configScreen(Screen parent) {

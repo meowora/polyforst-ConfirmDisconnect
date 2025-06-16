@@ -12,6 +12,7 @@ import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.LayoutElement;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.chat.report.ReportingContext;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -28,8 +29,14 @@ import java.util.List;
 
 @Mixin(PauseScreen.class)
 public abstract class PauseScreenMixin<T extends LayoutElement> extends Screen {
-    @Shadow protected abstract void onDisconnect();
+    //? if >=1.21.6 {
+    @Shadow
+    public static void disconnectFromWorld(Minecraft par1, Component par2) { }
+    //?} else {
+    /*@Shadow protected abstract void onDisconnect();
     @Shadow @Final private static Component RETURN_TO_MENU;
+    *///?}
+
     @Unique private final ConfirmDisconnectConfig config = ConfirmDisconnectConfig.CONFIG.instance();
     @Unique private boolean confirmDisconnect = false;
     @Unique private int delayTicker;
@@ -59,11 +66,11 @@ public abstract class PauseScreenMixin<T extends LayoutElement> extends Screen {
         this.disconnectButtons.clear();
 
         assert this.minecraft != null;
-        Component component = this.minecraft.isLocalServer() ? RETURN_TO_MENU : CommonComponents.GUI_DISCONNECT;
+        Component component = this.minecraft.isLocalServer() ? /*? if >=1.21.6 {*/ CommonComponents.GUI_RETURN_TO_MENU /*?} else {*/ /*RETURN_TO_MENU *//*?}*/ : CommonComponents.GUI_DISCONNECT;
 
         Button disconnectButton = Button.builder(component, (button) -> {
             if (confirmDisconnect) {
-                this.minecraft.getReportingContext().draftReportHandled(this.minecraft, (Screen) (Object) this, this::onDisconnect, true);
+                this.minecraft.getReportingContext().draftReportHandled(this.minecraft, (Screen) (Object) this, /*? if >=1.21.6 {*/ () -> disconnectFromWorld(this.minecraft, ClientLevel.DEFAULT_QUIT_MESSAGE) /*?} else {*/ /*this::onDisconnect *//*?}*/, true);
             } else {
                 confirmDisconnect = true;
                 button.setMessage(Component.translatable("confirm-disconnect.are-you-sure-discrete"));

@@ -2,7 +2,8 @@ package dev.microcontrollers.confirmdisconnect;
 
 import com.google.common.collect.Lists;
 import dev.microcontrollers.confirmdisconnect.config.ConfirmDisconnectConfig;
-import dev.microcontrollers.confirmdisconnect.mixin.PauseScreenInvokerMixin;
+//? if <1.21.6
+/*import dev.microcontrollers.confirmdisconnect.mixin.PauseScreenInvokerMixin;*/
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -10,10 +11,14 @@ import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 
 import java.util.Iterator;
 import java.util.List;
+
+//? if >=1.21.6
+import static net.minecraft.client.gui.screens.PauseScreen.disconnectFromWorld;
 
 public class ConfirmDisconnectScreen extends Screen {
     public Screen parent;
@@ -44,7 +49,7 @@ public class ConfirmDisconnectScreen extends Screen {
                 Component.translatable("confirm-disconnect.disconnect-multiplayer"), (btn) -> {
             assert this.minecraft != null;
             PauseScreen pauseScreen = (PauseScreen) parent;
-            this.minecraft.getReportingContext().draftReportHandled(this.minecraft, this, ((PauseScreenInvokerMixin)pauseScreen)::invokeOnDisconnect, true);
+            this.minecraft.getReportingContext().draftReportHandled(this.minecraft, this, /*? if >= 1.21.6 {*/ () -> disconnectFromWorld(this.minecraft, ClientLevel.DEFAULT_QUIT_MESSAGE) /*?} else {*/ /*((PauseScreenInvokerMixin)pauseScreen)::invokeOnDisconnect *//*?}*/, true);
         }).width(100).build();
 
         if (isConfirmOnLeft) {
@@ -57,7 +62,10 @@ public class ConfirmDisconnectScreen extends Screen {
 
         this.disconnectButtons.add(backButton);
         this.disconnectButtons.add(disconnectButton);
-        this.setButtonsActive(false);
+
+        if (ConfirmDisconnectConfig.CONFIG.instance().confirmDelay != 0) {
+            this.setButtonsActive(false);
+        }
 
         gridLayout.arrangeElements();
         FrameLayout.alignInRectangle(gridLayout, 0, 0, this.width, this.height, 0.5F, 0.25F);
@@ -72,6 +80,7 @@ public class ConfirmDisconnectScreen extends Screen {
         graphics.drawCenteredString(this.font, isLocal ? Component.translatable("confirm-disconnect.are-you-sure-local") : Component.translatable("confirm-disconnect.are-you-sure-multiplayer"), width >> 1, 40, 0xFFFFFFFF);
     }
 
+    @Override
     public void tick() {
         super.tick();
         if (this.delayTicker >= 20 * ConfirmDisconnectConfig.CONFIG.instance().confirmDelay) {
