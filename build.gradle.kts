@@ -51,6 +51,8 @@ base { archivesName.set(mod.id) }
 stonecutter.const("fabric", loader.isFabric)
 stonecutter.const("neoforge", loader.isNeoforge)
 
+stonecutter.allowExtensions("json")
+
 blossom {
 	replaceToken("@MODID@", mod.id)
 }
@@ -116,16 +118,9 @@ dependencies {
 
 	if (loader.isFabric) {
 		modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-		// TODO: remove
-		if (mc.version != "1.21.6-rc1") {
-			modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fabricApiVersion}+${mc.version}")
-			modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}")
-			modImplementation("com.terraformersmc:modmenu:${deps.modmenuVersion}")
-		} else {
-			modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fabricApiVersion}+1.21.6")
-			modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+1.21.6-${loader.loader}")
-			modImplementation(files("libs/modmenu.jar"))
-		}
+		modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fabricApiVersion}+${mc.version}")
+		modImplementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}")
+		modImplementation("com.terraformersmc:modmenu:${deps.modmenuVersion}")
 	} else if (loader.isNeoforge) {
 		"neoForge"("net.neoforged:neoforge:${findProperty("deps.neoforge")}")
 		implementation("dev.isxander:yet-another-config-lib:${deps.yaclVersion}+${mc.version}-${loader.loader}") { isTransitive = false }

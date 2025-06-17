@@ -16,7 +16,8 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.chat.report.ReportingContext;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import org.spongepowered.asm.mixin.Final;
+//? if <1.21.6
+/*import org.spongepowered.asm.mixin.Final;*/
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -83,7 +84,7 @@ public abstract class PauseScreenMixin<T extends LayoutElement> extends Screen {
         this.disconnectButtons.add(disconnectButton);
     }
 
-    @WrapOperation(method = /*? if fabric {*/ "method_19836" /*?} else {*/ /*"lambda$createPauseMenu$9" *//*?}*/, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/chat/report/ReportingContext;draftReportHandled(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Ljava/lang/Runnable;Z)V"))
+    @WrapOperation(method = /*? if fabric {*/ "method_19836" /*?} else {*/ /*"lambda$createPauseMenu$8" *//*?}*/, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/chat/report/ReportingContext;draftReportHandled(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/Screen;Ljava/lang/Runnable;Z)V"))
     private void addConfirmationScreen(ReportingContext instance, Minecraft minecraft, Screen screen, Runnable quitter, boolean quitToTitle, Operation<Void> original) {
         if (config.confirmEnabled && (config.enableInSingleplayer || config.enableInMultiplayer)) {
             boolean isLocal = Minecraft.getInstance().isLocalServer();
