@@ -9,7 +9,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
-import net.minecraft.client.gui.screens.PauseScreen;
+//? if <1.21.6
+/*import net.minecraft.client.gui.screens.PauseScreen;*/
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
@@ -48,7 +49,8 @@ public class ConfirmDisconnectScreen extends Screen {
                 Component.translatable("confirm-disconnect.quit-local") :
                 Component.translatable("confirm-disconnect.disconnect-multiplayer"), (btn) -> {
             assert this.minecraft != null;
-            PauseScreen pauseScreen = (PauseScreen) parent;
+            //? if <1.21.6
+            /*PauseScreen pauseScreen = (PauseScreen) parent;*/
             this.minecraft.getReportingContext().draftReportHandled(this.minecraft, this, /*? if >= 1.21.6 {*/ () -> disconnectFromWorld(this.minecraft, ClientLevel.DEFAULT_QUIT_MESSAGE) /*?} else {*/ /*((PauseScreenInvokerMixin)pauseScreen)::invokeOnDisconnect *//*?}*/, true);
         }).width(100).build();
 

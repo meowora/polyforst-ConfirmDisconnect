@@ -1,1 +1,4 @@
-- Fix version ranges
+- 1.20.x support
+- Fix issue with Discrete Confirmation causing the button to disappear and reappear on initial press
+- Fix issue with Discrete Confirmation causing extra buttons with some mods
+- Fix issue with Discrete Confirmation timer only accounting for time in pause menu rather than when button was clicked
