@@ -28,6 +28,10 @@ public abstract class PauseScreenMixin<T extends LayoutElement> extends Screen {
 
     @Inject(method = /*? if >=1.21.6 {*/ "disconnectFromWorld" /*?} else {*/ /*"onDisconnect" *//*?}*/, at = @At("HEAD"), cancellable = true)
     private /*? if >=1.21.6 {*/ static /*?}*/ void onDisconnect(/*? if >=1.21.6 {*/ Minecraft minecraft, Component component, /*?}*/ CallbackInfo ci) {
+        if (minecraft.screen instanceof ConfirmDisconnectScreen) {
+            return;
+        }
+
         boolean isLocal = minecraft.isLocalServer();
         if (config.confirmEnabled && !confirmDisconnect && ((isLocal && config.enableInSingleplayer) || (!isLocal && config.enableInMultiplayer))) {
             delayTicker = 0;
