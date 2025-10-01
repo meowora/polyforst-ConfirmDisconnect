@@ -10,6 +10,6 @@ public class ConfirmDisconnectConfig extends Config {
     public static boolean mainToggle = false;
 
     public ConfirmDisconnectConfig() {
-        super("confirm_disconnect", "Confirm Disconnect", Category.OTHER);
+        super("confirm_disconnect.json", "Confirm Disconnect", Category.OTHER);
     }
 }
