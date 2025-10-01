@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "${id}",
+	"id": "${mod_id}",
 	"version": "${version}",
 	"name": "${name}",
 	"description": "${description}",
@@ -8,7 +8,8 @@
 		"Microcontrollers"
 	],
 	"contributors": [
-      "Tellinq"
+      "Tellinq",
+      "Meoworawr"
 	],
 	"contact": {
 		"homepage": "${modrinth}",
@@ -16,25 +17,20 @@
 		"issues": "${issues}"
 	},
 	"license": "${license}",
-	"icon": "assets/${id}/icon.png",
+	"icon": "assets/${mod_id}/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"dev.microcontrollers.confirmdisconnect.ConfirmDisconnect"
-		],
-		"modmenu": [
-			"dev.microcontrollers.confirmdisconnect.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [
-		"${id}.mixins.json"
+		"mixins.confirmdisconnect.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",
 		"minecraft": "${mcdep}",
-		"java": ">=17",
-		"fabric-api": "*",
-		"yet_another_config_lib_v3": "*"
+		"fabric-api": "*"
 	},
 	"custom": {
 		"modmenu": {

@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "dev.microcontrollers.confirmdisconnect.mixins",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"client": [
+		"GuiIngameMenuMixin"
+	]
+}

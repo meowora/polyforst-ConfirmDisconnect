@@ -1,30 +1,27 @@
 package dev.microcontrollers.confirmdisconnect;
 
-import dev.microcontrollers.confirmdisconnect.config.ConfirmDisconnectConfig;
-//? if fabric
-import net.fabricmc.api.ModInitializer;
-//? if neoforge {
-/*import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-*///?}
+//#if FORGE
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-
-//? if neoforge
-/*@Mod(value = "confirmdisconnect", dist = Dist.CLIENT)*/
-public class ConfirmDisconnect /*? if fabric {*/ implements ModInitializer /*?}*/ {
-    //? if fabric {
-    @Override
-    public void onInitialize() {
-        ConfirmDisconnectConfig.CONFIG.load();
+@Mod(modid = "confirm-disconnect", version = "@MOD_VERSION")
+//#endif
+public class ConfirmDisconnect
+        //#if FABRIC
+        //$$ implements net.fabricmc.api.ClientModInitializer
+        //#endif
+{
+    //#if FORGE
+    @Mod.EventHandler
+    public void onInitializeClient(FMLInitializationEvent event) {
+        if (!event.getSide().isClient()) {
+            return;
+        }
+    //#else
+    //$$ @Override
+    //$$ public void onInitializeClient() {
+    //#endif
+        ConfirmDisconnectConfig.INSTANCE.preload();
     }
-    //?}
 
-    //? if neoforge {
-    /*public ConfirmDisconnect() {
-        ConfirmDisconnectConfig.CONFIG.load();
-        ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, parent) -> ConfirmDisconnectConfig.configScreen(parent));
-    }
-	*///?}
 }
